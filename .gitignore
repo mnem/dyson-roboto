@@ -158,3 +158,5 @@ fastlane/screenshots
 fastlane/test_output
 
 
+.DS_Store
+
