@@ -9,10 +9,11 @@
 #import "Commander.h"
 #import "MQTTClient.h"
 #import "NSError+Ultratron.h"
-#import <opencv2/opencv.hpp>
 
 #define USE_ASYNC_COMMANDS (0)
 #define USE_ASYNC_CONNECT (0)
+#define USE_OPEN_CV (1)
+#define LOG_UNSUBSCRIBED_TOPIC_DATA (1)
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,9 +22,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSURLSession *imageFeedSession;
 @property (nonatomic) NSTimer *imageFeedPollingTimer;
 @property (nonatomic) NSString *ipAddress;
+
+@property (nonatomic) NSMutableDictionary<NSString *, SubscriptionHandler> *subscriptionHandlers;
 @end
 
 @implementation Commander
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _subscriptionHandlers = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
 
 - (void)connectToIPAddress:(NSString *)ipAddress handler:(ConnectionHandler)handler {
     self.ipAddress = ipAddress;
@@ -67,22 +79,41 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
     
+    MQTTQosLevel qos = MQTTQosLevelAtMostOnce;
+    
 #if USE_ASYNC_COMMANDS
     [self.session publishData:data
                       onTopic:topic
                        retain:NO
-                          qos:MQTTQosLevelAtLeastOnce
+                          qos:qos
                publishHandler:^(NSError *error) {
                    if (error != nil) {
                        NSLog(@"Commander send command error: %@", error);
                    }
                }];
 #else
-    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelAtLeastOnce];
+    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:qos];
 #endif // USE_ASYNC_COMMANDS
 }
 
 #pragma mark - MQTTSessionDelegate
+
+- (void)newMessage:(MQTTSession *)session
+              data:(NSData *)data
+           onTopic:(NSString *)topic
+               qos:(MQTTQosLevel)qos
+          retained:(BOOL)retained
+               mid:(unsigned int)mid {
+    SubscriptionHandler handler = self.subscriptionHandlers[topic];
+    if (handler) {
+        handler(topic, data);
+    } else {
+#if LOG_UNSUBSCRIBED_TOPIC_DATA
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@">>>>>>>>>> Recieved message for topic %@: %@", topic, string);
+#endif // LOG_UNSUBSCRIBED_TOPIC_DATA
+    }
+}
 
 #pragma mark - ImageFeedSetup
 
@@ -110,6 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Poll
 
+#if USE_OPEN_CV
 - (void)poll
 {
     NSLog(@"Poll for Image Feed");
@@ -136,7 +168,49 @@ NS_ASSUME_NONNULL_BEGIN
     
     [task resume];
 }
+#else
+- (void)poll
+{
+    //    NSLog(@"Poll for Image Feed");
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
+    
+    NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        UIImage *image = [UIImage imageWithData:data];
+        //        NSLog(@"Image Received ");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.delegate)
+            {
+                [self.delegate imageFeedUpdated:image];
+            }
+        });
+    }];
+    
+    [task resume];
+}
+#endif // USE_OPEN_CV
 
+- (void)subscribeToTopic:(NSString *)topic withHandler:(SubscriptionHandler)handler {
+    [self.session subscribeToTopic:topic
+                           atLevel:2
+                  subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss){
+                      if (error) {
+                          NSLog(@"Subscription failed %@", error.localizedDescription);
+                      } else {
+                          NSLog(@"Subscription sucessfull! Granted Qos: %@", gQoss);
+#warning Lots of lovely retain cycles possible here. Fix at some point.
+                          self.subscriptionHandlers[topic] = handler;
+                      }
+                  }];
+}
+
+- (void)unsubscribeFromTopic:(NSString *)topic {
+    [self.subscriptionHandlers removeObjectForKey:topic];
+    [self.session unsubscribeTopic:topic];
+}
+
+#pragma mark - OpenCV
 
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
@@ -221,6 +295,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     return finalImage;
 }
+
 
 @end
 
