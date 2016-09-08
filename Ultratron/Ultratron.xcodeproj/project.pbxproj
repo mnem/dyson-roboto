@@ -14,6 +14,7 @@
 		BBA3DAB71D8198D500516E1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBA3DAB61D8198D500516E1B /* Assets.xcassets */; };
 		BBA3DABA1D8198D500516E1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA3DAB81D8198D500516E1B /* LaunchScreen.storyboard */; };
 		BBA3DAC51D8198D500516E1B /* UltratronTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAC41D8198D500516E1B /* UltratronTests.m */; };
+		C0C8B7A6F477F0316A7A116F /* libPods-Ultratron.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9839340C263B5BB37AE3E16C /* libPods-Ultratron.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42661DEBB5F05DF2A925DE6E /* Pods-Ultratron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ultratron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron.release.xcconfig"; sourceTree = "<group>"; };
+		4752E534C1E671D5C61E6537 /* Pods-Ultratron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ultratron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron.debug.xcconfig"; sourceTree = "<group>"; };
+		9839340C263B5BB37AE3E16C /* libPods-Ultratron.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ultratron.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA3DAA71D8198D500516E1B /* Ultratron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ultratron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA3DAAB1D8198D500516E1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BBA3DAAD1D8198D500516E1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C8B7A6F477F0316A7A116F /* libPods-Ultratron.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +65,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30AC514681684C289F18B0DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9839340C263B5BB37AE3E16C /* libPods-Ultratron.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		893385F124CACFA30FD7DAA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4752E534C1E671D5C61E6537 /* Pods-Ultratron.debug.xcconfig */,
+				42661DEBB5F05DF2A925DE6E /* Pods-Ultratron.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BBA3DA9E1D8198D500516E1B = {
 			isa = PBXGroup;
 			children = (
 				BBA3DAA91D8198D500516E1B /* Ultratron */,
 				BBA3DAC31D8198D500516E1B /* UltratronTests */,
 				BBA3DAA81D8198D500516E1B /* Products */,
+				893385F124CACFA30FD7DAA1 /* Pods */,
+				30AC514681684C289F18B0DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,9 +142,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBA3DAC91D8198D500516E1B /* Build configuration list for PBXNativeTarget "Ultratron" */;
 			buildPhases = (
+				B2372AB48D5FD13468143D9E /* [CP] Check Pods Manifest.lock */,
 				BBA3DAA31D8198D500516E1B /* Sources */,
 				BBA3DAA41D8198D500516E1B /* Frameworks */,
 				BBA3DAA51D8198D500516E1B /* Resources */,
+				5F643B633A00422844DB3F67 /* [CP] Embed Pods Frameworks */,
+				684420A0AACB2CF18FDB3C19 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,6 +187,7 @@
 				TargetAttributes = {
 					BBA3DAA61D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = A8NKHWJDUL;
 					};
 					BBA3DABF1D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -205,6 +233,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F643B633A00422844DB3F67 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		684420A0AACB2CF18FDB3C19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2372AB48D5FD13468143D9E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BBA3DAA31D8198D500516E1B /* Sources */ = {
@@ -341,9 +417,12 @@
 		};
 		BBA3DACA1D8198D500516E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4752E534C1E671D5C61E6537 /* Pods-Ultratron.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8NKHWJDUL;
 				INFOPLIST_FILE = Ultratron/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noiseandheat.ios.Ultratron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,9 +431,12 @@
 		};
 		BBA3DACB1D8198D500516E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42661DEBB5F05DF2A925DE6E /* Pods-Ultratron.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8NKHWJDUL;
 				INFOPLIST_FILE = Ultratron/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noiseandheat.ios.Ultratron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -404,6 +486,7 @@
 				BBA3DACB1D8198D500516E1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBA3DACC1D8198D500516E1B /* Build configuration list for PBXNativeTarget "UltratronTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +495,7 @@
 				BBA3DACE1D8198D500516E1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
