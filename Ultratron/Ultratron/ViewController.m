@@ -10,6 +10,11 @@
 #import "JCMyScene.h"
 #import "Commander.h"
 
+NSString * const kTopicWheelSpeed = @"command/wheel_speed";
+NSString * const kTopicStatusBumps = @"status/bumps";
+NSString * const kTopicStatusPsd = @"status/psd";
+NSString * const kTopicStatusOdemetry = @"status/odemetry";
+
 @interface ViewController () <JoystickDelegate, CommanderDelegate>
 @property (nonatomic) Commander *commander;
 @property (weak, nonatomic) IBOutlet SKView *spriteKitView;
@@ -36,6 +41,33 @@
         NSLog(@"Connected!");
         self.spriteKitView.paused = NO;
         [self setupJoystickView];
+        [self setupSubscriptions];
+    }];
+}
+
+- (void)setupSubscriptions {
+    [self.commander subscribeToTopic:kTopicWheelSpeed
+                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Wheel speed: %@", string);
+    }];
+
+    [self.commander subscribeToTopic:kTopicStatusBumps
+                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"BUMPS! %@", string);
+    }];
+
+    [self.commander subscribeToTopic:kTopicStatusPsd
+                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"PSD: %@", string);
+    }];
+    
+    [self.commander subscribeToTopic:kTopicStatusOdemetry
+                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Odemetry: %@", string);
     }];
 }
 
@@ -57,27 +89,30 @@
 
 - (IBAction)handleLeft:(UIButton *)sender {
     NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
-    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    [self.commander sendCommandDictionary:command forTopic:kTopicWheelSpeed];
 }
 - (IBAction)handleRight:(UIButton *)sender {
     NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
-    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    [self.commander sendCommandDictionary:command forTopic:kTopicWheelSpeed];
 }
 - (IBAction)handleZero:(UIButton *)sender {
     NSDictionary *command = @{@"Left" : @(0), @"Right" : @(0)};
-    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    [self.commander sendCommandDictionary:command forTopic:kTopicWheelSpeed];
 }
 
 #pragma mark - JoystickDelegate
 
 - (void)updateWithLeftJoystick:(float)leftY andRightJoystick:(float)rightY {
-    NSLog(@"Updating joytstick");
-    float leftPower = leftY * 4000;
-    float rightPower = rightY * 4000;
-    NSLog(@"left:%f right:%f",leftPower, rightPower);
+//    NSLog(@"Updating joytstick");
+    double leftPower = leftY * 4000.0;
+    double rightPower = rightY * 4000.0;
+//    NSLog(@"left:%f right:%f",leftPower, rightPower);
     
     NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
-//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    [self.commander sendCommandDictionary:command forTopic:kTopicWheelSpeed];
+
+//        NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
+//        [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 
     //    [self doCommand:leftPower and:rightPower];
 }
