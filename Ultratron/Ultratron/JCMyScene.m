@@ -30,7 +30,7 @@
         [self addChild:self.joystickLeft];
         //JCJoystick Right
         self.joystickRight = [[JCJoystick alloc] initWithControlRadius:40 baseRadius:45 baseColor:[SKColor blueColor] joystickRadius:25 joystickColor:[SKColor redColor]];
-        [self.joystickRight setPosition:CGPointMake(400,200)];
+        [self.joystickRight setPosition:CGPointMake(500,200)];
         [self addChild:self.joystickRight];
         
         
@@ -48,7 +48,7 @@
         
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor clearColor];
         
 
         

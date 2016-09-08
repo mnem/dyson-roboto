@@ -23,20 +23,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.spriteKitView.paused = YES;
-    
-    self.commander = [[Commander alloc] init];
-    self.commander.delegate = self;
-    [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error connecting: %@", error);
-            return;
-        }
+//    self.spriteKitView.paused = YES;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        NSLog(@"Connected!");
-        self.spriteKitView.paused = NO;
-        [self setupJoystickView];
-    }];
+        self.commander = [[Commander alloc] init];
+        self.commander.delegate = self;
+        [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"Error connecting: %@", error);
+                return;
+            }
+            
+            NSLog(@"Connected!");
+//            self.spriteKitView.paused = NO;
+//            [self setupJoystickView];
+        }];
+        
+    });
+    
+    
+    [self setupJoystickView];
 }
 
 - (void)setupJoystickView {
