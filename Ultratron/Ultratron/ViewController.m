@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *zero;
 @property (weak, nonatomic) IBOutlet UIButton *right;
 @property (strong) IBOutlet UIImageView *cameraFeedImage;
+@property (strong) IBOutlet UIView *deactiveCameraIndicator;
 
 @property (nonatomic,assign) float leftPower;
 @property (nonatomic,assign) float rightPower;
@@ -32,7 +33,7 @@
     self.leftPower = 0;
     self.rightPower = 0;
     
-    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
+    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -113,7 +114,15 @@
 
 -(void)imageFeedUpdated:(UIImage *)image
 {
-    self.cameraFeedImage.image = image;
+    if (image)
+    {
+        self.cameraFeedImage.image = image;
+        self.deactiveCameraIndicator.hidden = YES;
+    }
+    else
+    {
+        self.deactiveCameraIndicator.hidden = NO;
+    }
 }
 
 @end

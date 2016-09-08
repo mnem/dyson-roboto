@@ -52,6 +52,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWk-M3-CtS">
+                                <rect key="frame" x="21" y="21" width="53" height="49"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="8fD-JL-zWL"/>
+                                    <constraint firstAttribute="height" constant="49" id="vOi-W6-X6e"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -63,14 +71,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8f6-00-Rmy" secondAttribute="bottom" id="U0c-iW-SgF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="j41-My-dDv" secondAttribute="bottom" id="Vsl-rh-bbq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WNV-BN-ahx" secondAttribute="trailing" id="cbw-eK-ynn"/>
+                            <constraint firstItem="xWk-M3-CtS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="1" id="dcR-u2-a8R"/>
                             <constraint firstItem="WNV-BN-ahx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dwj-4o-VI9"/>
                             <constraint firstItem="8f6-00-Rmy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iAR-Wh-kD2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WNV-BN-ahx" secondAttribute="bottom" constant="10" id="jgq-WK-MkT"/>
+                            <constraint firstItem="xWk-M3-CtS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="laO-HZ-fIW"/>
                             <constraint firstItem="j41-My-dDv" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="yJ0-Fh-Yql"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraFeedImage" destination="8f6-00-Rmy" id="ZNr-8Q-2lW"/>
+                        <outlet property="deactiveCameraIndicator" destination="xWk-M3-CtS" id="Cfw-7c-2YM"/>
                         <outlet property="spriteKitView" destination="j41-My-dDv" id="j9d-Og-9m7"/>
                     </connections>
                 </viewController>
