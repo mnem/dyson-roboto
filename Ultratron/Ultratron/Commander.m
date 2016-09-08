@@ -10,7 +10,7 @@
 #import "MQTTClient.h"
 #import "NSError+Ultratron.h"
 
-#define USE_ASYNC_COMMANDS (0)
+#define USE_ASYNC_COMMANDS (1)
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -59,14 +59,14 @@ NS_ASSUME_NONNULL_BEGIN
     [self.session publishData:data
                       onTopic:topic
                        retain:NO
-                          qos:MQTTQosLevelExactlyOnce
+                          qos:MQTTQosLevelAtLeastOnce
                publishHandler:^(NSError *error) {
                    if (error != nil) {
                        NSLog(@"Commander send command error: %@", error);
                    }
                }];
 #else
-    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelExactlyOnce];
+    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelAtLeastOnce];
 #endif
 }
 
