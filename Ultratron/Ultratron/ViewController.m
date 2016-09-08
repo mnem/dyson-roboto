@@ -10,6 +10,11 @@
 #import "JCMyScene.h"
 #import "Commander.h"
 
+NSString * const kTopicWheelSpeed = @"command/wheel_speed";
+NSString * const kTopicStatusBumps = @"status/bumps";
+NSString * const kTopicStatusPsd = @"status/psd";
+NSString * const kTopicStatusOdemetry = @"status/odemetry";
+
 @interface ViewController () <JoystickDelegate, CommanderDelegate>
 @property (nonatomic) Commander *commander;
 @property (weak, nonatomic) IBOutlet SKView *spriteKitView;
@@ -46,6 +51,7 @@
             }
             
             NSLog(@"Connected!");
+            [self setupSubscriptions];
 //            self.spriteKitView.paused = NO;
 //            [self setupJoystickView];
         }];
@@ -54,6 +60,32 @@
     
     
     [self setupJoystickView];
+}
+
+- (void)setupSubscriptions {
+//    [self.commander subscribeToTopic:kTopicWheelSpeed
+//                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+//                             NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                             NSLog(@"Wheel speed: %@", string);
+//                         }];
+    
+    [self.commander subscribeToTopic:kTopicStatusBumps
+                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+                             NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                             NSLog(@"BUMPS! %@", string);
+                         }];
+    
+//    [self.commander subscribeToTopic:kTopicStatusPsd
+//                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+//                             NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                             NSLog(@"PSD: %@", string);
+//                         }];
+    
+//    [self.commander subscribeToTopic:kTopicStatusOdemetry
+//                         withHandler:^(NSString *topic, NSData * _Nonnull data) {
+//                             NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                             NSLog(@"Odemetry: %@", string);
+//                         }];
 }
 
 - (void)setupJoystickView {
@@ -105,11 +137,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *command = @{@"Left" : @(floor(self.leftPower)), @"Right" : @(floor(self.rightPower))};
         [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
-        
     });
-    
-    
-    
 }
 
 -(void)imageFeedUpdated:(UIImage *)image

@@ -12,6 +12,7 @@
 
 #define USE_ASYNC_COMMANDS (0)
 #define USE_ASYNC_CONNECT (0)
+#define LOG_UNSUBSCRIBED_TOPIC_DATA (1)
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,9 +21,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSURLSession *imageFeedSession;
 @property (nonatomic) NSTimer *imageFeedPollingTimer;
 @property (nonatomic) NSString *ipAddress;
+
+@property (nonatomic) NSMutableDictionary<NSString *, SubscriptionHandler> *subscriptionHandlers;
 @end
 
 @implementation Commander
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _subscriptionHandlers = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
 
 - (void)connectToIPAddress:(NSString *)ipAddress handler:(ConnectionHandler)handler {
     self.ipAddress = ipAddress;
@@ -85,6 +97,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - MQTTSessionDelegate
 
+- (void)newMessage:(MQTTSession *)session
+              data:(NSData *)data
+           onTopic:(NSString *)topic
+               qos:(MQTTQosLevel)qos
+          retained:(BOOL)retained
+               mid:(unsigned int)mid {
+    SubscriptionHandler handler = self.subscriptionHandlers[topic];
+    if (handler) {
+        handler(topic, data);
+    } else {
+#if LOG_UNSUBSCRIBED_TOPIC_DATA
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@">>>>>>>>>> Recieved message for topic %@: %@", topic, string);
+#endif // LOG_UNSUBSCRIBED_TOPIC_DATA
+    }
+}
+
 #pragma mark - ImageFeedSetup
 
 - (void)setUpImageFeed{
@@ -132,6 +161,24 @@ NS_ASSUME_NONNULL_BEGIN
     [task resume];
 }
 
+- (void)subscribeToTopic:(NSString *)topic withHandler:(SubscriptionHandler)handler {
+    [self.session subscribeToTopic:topic
+                      atLevel:2
+             subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss){
+                 if (error) {
+                    NSLog(@"Subscription failed %@", error.localizedDescription);
+                } else {
+                    NSLog(@"Subscription sucessfull! Granted Qos: %@", gQoss);
+#warning Lots of lovely retain cycles possible here. Fix at some point.
+                    self.subscriptionHandlers[topic] = handler;
+                }
+             }];
+}
+
+- (void)unsubscribeFromTopic:(NSString *)topic {
+    [self.subscriptionHandlers removeObjectForKey:topic];
+    [self.session unsubscribeTopic:topic];
+}
 
 
 @end

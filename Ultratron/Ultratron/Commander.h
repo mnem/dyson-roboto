@@ -15,9 +15,10 @@
 
 @end
 
-typedef void (^ConnectionHandler)(NSError * _Nullable);
-
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^ConnectionHandler)(NSError * _Nullable);
+typedef void (^SubscriptionHandler)(NSString *topic, NSData *data);
 
 @interface Commander : NSObject
 
@@ -39,6 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param topic   The topic to send the command to.
  */
 - (void)sendCommandDictionary:(NSDictionary *)command forTopic:(NSString *)topic;
+
+/**
+ Subscribe to the specified topic.
+ 
+ @param topic   The topic to subscribe to.
+ @param handler The handler which recieves topic data. Only 1 handler may be active for a given topic.
+ */
+- (void)subscribeToTopic:(NSString *)topic withHandler:(SubscriptionHandler)handler;
 
 @end
 
