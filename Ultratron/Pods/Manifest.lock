@@ -16,14 +16,17 @@ PODS:
     - MQTTClient/Min
   - MQTTClient/Min (0.8.1):
     - CocoaLumberjack
+  - OpenCV-iOS (3.1.1)
 
 DEPENDENCIES:
   - MQTTClient
+  - OpenCV-iOS
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   MQTTClient: 097b1e62c319f7c90b489fa540038064afc95f42
+  OpenCV-iOS: 257d4b484571baf3f4a160693fbc00603dd3ccf4
 
-PODFILE CHECKSUM: bfcbb5e1962f639de615f5ef3905ed128096e672
+PODFILE CHECKSUM: 29fe81199d51a759a24338eb2b968d0afad800bc
 
 COCOAPODS: 1.0.1
