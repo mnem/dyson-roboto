@@ -56,16 +56,16 @@
 }
 
 - (IBAction)handleLeft:(UIButton *)sender {
-//    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
-//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
+    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleRight:(UIButton *)sender {
-//    NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
-//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
+    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleZero:(UIButton *)sender {
-//    NSDictionary *command = @{@"Left" : @(0), @"Right" : @(0)};
-//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    NSDictionary *command = @{@"Left" : @(0), @"Right" : @(0)};
+    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 
 #pragma mark - JoystickDelegate
@@ -77,7 +77,7 @@
     NSLog(@"left:%f right:%f",leftPower, rightPower);
     
     NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
-    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 
     //    [self doCommand:leftPower and:rightPower];
 }

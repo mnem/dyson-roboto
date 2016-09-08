@@ -10,7 +10,7 @@
 #import "MQTTClient.h"
 #import "NSError+Ultratron.h"
 
-#define USE_ASYNC_COMMANDS (1)
+#define USE_ASYNC_COMMANDS (0)
 #define USE_ASYNC_CONNECT (0)
 
 NS_ASSUME_NONNULL_BEGIN
