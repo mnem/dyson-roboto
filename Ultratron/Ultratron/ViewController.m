@@ -27,6 +27,7 @@
     
     self.session = [[MQTTSession alloc] init];
     self.session.transport = transport;
+    self.session.protocolLevel = MQTTProtocolVersion31;
     
     self.session.delegate = self;
     
@@ -47,5 +48,32 @@
 
 #pragma mark - MQTTSessionDelegate
 
+- (IBAction)handleLeft:(UIButton *)sender {
+    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
+    NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
+    
+    [self.session publishAndWaitData:data
+                             onTopic:@"command/wheel_speed"
+                              retain:NO
+                                 qos:MQTTQosLevelAtLeastOnce];
+}
+- (IBAction)handleRight:(UIButton *)sender {
+    NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
+    NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
+    
+    [self.session publishAndWaitData:data
+                             onTopic:@"command/wheel_speed"
+                              retain:NO
+                                 qos:MQTTQosLevelAtLeastOnce];
+}
+- (IBAction)handleZero:(UIButton *)sender {
+    NSDictionary *command = @{@"Left" : @(0), @"Right" : @(0)};
+    NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
+    
+    [self.session publishAndWaitData:data
+                             onTopic:@"command/wheel_speed"
+                              retain:NO
+                                 qos:MQTTQosLevelAtLeastOnce];
+}
 
 @end
