@@ -26,11 +26,11 @@
     if (self = [super initWithSize:size]) {
         //JCJoystick Left
         self.joystickLeft = [[JCJoystick alloc] initWithControlRadius:40 baseRadius:45 baseColor:[SKColor blueColor] joystickRadius:25 joystickColor:[SKColor redColor]];
-        [self.joystickLeft setPosition:CGPointMake(80,200)];
+        [self.joystickLeft setPosition:CGPointMake(80,280)];
         [self addChild:self.joystickLeft];
         //JCJoystick Right
         self.joystickRight = [[JCJoystick alloc] initWithControlRadius:40 baseRadius:45 baseColor:[SKColor blueColor] joystickRadius:25 joystickColor:[SKColor redColor]];
-        [self.joystickRight setPosition:CGPointMake(500,200)];
+        [self.joystickRight setPosition:CGPointMake(500,280)];
         [self addChild:self.joystickRight];
         
         

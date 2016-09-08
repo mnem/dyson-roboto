@@ -37,7 +37,7 @@ NSString * const kTopicStatusOdemetry = @"status/odemetry";
     self.leftPower = 0;
     self.rightPower = 0;
     
-    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
+    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -104,11 +104,11 @@ NSString * const kTopicStatusOdemetry = @"status/odemetry";
 }
 
 - (IBAction)handleLeft:(UIButton *)sender {
-    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
+    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-1000)};
     [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleRight:(UIButton *)sender {
-    NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
+    NSDictionary *command = @{@"Left" : @(-1000), @"Right" : @(4000)};
     [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleZero:(UIButton *)sender {
@@ -119,41 +119,17 @@ NSString * const kTopicStatusOdemetry = @"status/odemetry";
 #pragma mark - JoystickDelegate
 
 - (void)updateWithLeftJoystick:(float)leftY andRightJoystick:(float)rightY {
-   
     
     self.leftPower = leftY * 4000;
     self.rightPower = rightY * 4000;
-    
-    
-    
-////    if (leftPower > 0 && rightPower > 0) {
-//        NSLog(@"left:%f right:%f",leftPower, rightPower);
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
-//            [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
-//        });
-    
-        
-//    }
-    
 
-    //    [self doCommand:leftPower and:rightPower];
 }
 
 - (void)trigerSendCommand {
-//    NSString *leftStr = [NSString stringWithFormat:@"%@",[@(self.leftPower) integerValue]];
-//    NSString *rightStr = [NSString stringWithFormat:@"%",[@(self.rightPower) integerValue]];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-//        NSLog(@"left:%@ right:%@",@(floor(self.leftPower)), @(floor(self.rightPower)));
         NSDictionary *command = @{@"Left" : @(floor(self.leftPower)), @"Right" : @(floor(self.rightPower))};
         [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
-        
     });
-    
-    
-    
 }
 
 -(void)imageFeedUpdated:(UIImage *)image
