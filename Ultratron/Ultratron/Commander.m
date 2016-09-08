@@ -10,6 +10,8 @@
 #import "MQTTClient.h"
 #import "NSError+Ultratron.h"
 
+#define USE_ASYNC_COMMANDS (0)
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Commander () <MQTTSessionDelegate>
@@ -53,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
     
+#if USE_ASYNC_COMMANDS
     [self.session publishData:data
                       onTopic:topic
                        retain:NO
@@ -62,6 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
                        NSLog(@"Commander send command error: %@", error);
                    }
                }];
+#else
+    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelExactlyOnce];
+#endif
 }
 
 #pragma mark - MQTTSessionDelegate
