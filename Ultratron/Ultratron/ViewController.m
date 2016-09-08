@@ -33,7 +33,7 @@
     
     [self.session connectAndWaitTimeout:30];  //this is part of the synchronous API}
     
-    [self doCommand];
+//    [self doCommand];
 }
 
 - (void)doCommand {
