@@ -18,8 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-BN-ahx">
-                                <rect key="frame" x="16" y="319" width="560" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-00-Rmy">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j41-My-dDv" customClass="SKView">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-BN-ahx">
+                                <rect key="frame" x="20" y="560" width="560" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZ2-Na-Ma6">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
@@ -45,29 +52,21 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j41-My-dDv" customClass="SKView">
-                                <rect key="frame" x="20" y="20" width="560" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-00-Rmy">
-                                <rect key="frame" x="180" y="236" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="UBc-yp-san"/>
-                                    <constraint firstAttribute="width" constant="240" id="kjH-6Z-7TU"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="j41-My-dDv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1dB-VB-wOm"/>
-                            <constraint firstItem="WNV-BN-ahx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3C3-P3-3sd"/>
-                            <constraint firstItem="j41-My-dDv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BOJ-ck-T4t"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WNV-BN-ahx" secondAttribute="trailing" id="Cfp-xJ-kDG"/>
-                            <constraint firstItem="WNV-BN-ahx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FyZ-gt-Yt3"/>
-                            <constraint firstItem="8f6-00-Rmy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ows-06-K4R"/>
-                            <constraint firstItem="8f6-00-Rmy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SIL-Ei-aUm"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="j41-My-dDv" secondAttribute="bottom" id="XFc-p1-njb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="j41-My-dDv" secondAttribute="trailing" id="w6s-WV-GdD"/>
+                            <constraint firstItem="8f6-00-Rmy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1fx-kr-tcz"/>
+                            <constraint firstItem="j41-My-dDv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2SN-gZ-mWW"/>
+                            <constraint firstItem="WNV-BN-ahx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Abg-pH-3P7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8f6-00-Rmy" secondAttribute="trailing" id="CPM-5h-Mhk"/>
+                            <constraint firstItem="j41-My-dDv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="JTj-63-Y67"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8f6-00-Rmy" secondAttribute="bottom" id="U0c-iW-SgF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="j41-My-dDv" secondAttribute="bottom" id="Vsl-rh-bbq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WNV-BN-ahx" secondAttribute="trailing" id="cbw-eK-ynn"/>
+                            <constraint firstItem="WNV-BN-ahx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dwj-4o-VI9"/>
+                            <constraint firstItem="8f6-00-Rmy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iAR-Wh-kD2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WNV-BN-ahx" secondAttribute="bottom" constant="10" id="jgq-WK-MkT"/>
+                            <constraint firstItem="j41-My-dDv" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="yJ0-Fh-Yql"/>
                         </constraints>
                     </view>
                     <connections>
