@@ -9,11 +9,49 @@
 #import "Commander.h"
 #import "MQTTClient.h"
 #import "NSError+Ultratron.h"
+#import "opencv2/opencv.hpp"
 
 #define USE_ASYNC_COMMANDS (0)
 #define USE_ASYNC_CONNECT (0)
 #define USE_OPEN_CV (1)
 #define LOG_UNSUBSCRIBED_TOPIC_DATA (1)
+
+
+
+
+
+
+
+
+void build_map(int width, int height, cv::Mat & map_x, cv::Mat & map_y) {
+    const auto PI = 3.1415926;
+    const auto midx = width / 2;
+    const auto midy = height / 2;
+    const auto maxmag = fmax(midx, midy);
+    const auto circum = 2 * PI * maxmag;
+    
+    map_x.create(static_cast<int>(maxmag), static_cast<int>(circum), CV_32FC1);
+    map_y.create(static_cast<int>(maxmag), static_cast<int>(circum), CV_32FC1);
+    for(int j = 0; j < static_cast<int>(maxmag); j++) {
+        for(int i = 0; i < static_cast<int>(circum); i++) {
+            const auto r = static_cast<float>(j);
+            const auto theta = (static_cast<float>(i) / maxmag);
+            const auto xs = midx - r * sin(theta);
+            const auto ys = midy - r * cos(theta);
+            map_x.at<float>(j, i) = xs;
+            map_y.at<float>(j, i) = ys;
+            //map_x.at<float>(j, i) = i;
+            //map_y.at<float>(j, i) = j;
+        }
+    }
+}
+
+
+
+
+
+
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -152,11 +190,21 @@ NS_ASSUME_NONNULL_BEGIN
         UIImage *image = [UIImage imageWithData:data];
         NSLog(@"Image Received ");
         
-        cv::Mat unwrapped = [self cvMatGrayFromUIImage:image];
+        cv::Mat unwrapped = [self cvMatFromUIImage:image];
+        
+        static cv::Mat map_x;
+        static cv::Mat map_y;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            build_map(unwrapped.cols, unwrapped.rows, map_x, map_y);
+        });
         
         
         
-        image = [self UIImageFromCVMat:unwrapped];
+        cv::Mat remapped;
+        cv::remap(unwrapped, remapped, map_x, map_y, CV_INTER_LINEAR);
+        
+        image = [self UIImageFromCVMat:remapped];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.delegate)
@@ -193,7 +241,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)subscribeToTopic:(NSString *)topic withHandler:(SubscriptionHandler)handler {
     [self.session subscribeToTopic:topic
-                           atLevel:2
+                           atLevel:MQTTQosLevelExactlyOnce
                   subscribeHandler:^(NSError *error, NSArray<NSNumber *> *gQoss){
                       if (error) {
                           NSLog(@"Subscription failed %@", error.localizedDescription);

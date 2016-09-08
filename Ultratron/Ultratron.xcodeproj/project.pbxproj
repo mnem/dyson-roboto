@@ -126,13 +126,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BB747A611D81A8F8008A2041 /* Communication */ = {
+		BB747A611D81A8F8008A2041 /* Commander */ = {
 			isa = PBXGroup;
 			children = (
 				BB747A5E1D81A8EE008A2041 /* Commander.h */,
 				BB747A5F1D81A8EE008A2041 /* Commander.mm */,
 			);
-			name = Communication;
+			name = Commander;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -162,7 +162,7 @@
 				392426471D81AC9600FF2A64 /* Joystick */,
 				BBFDF7381D81B33C004F4A96 /* Categories */,
 				BBA3DAB61D8198D500516E1B /* Assets.xcassets */,
-				BB747A611D81A8F8008A2041 /* Communication */,
+				BB747A611D81A8F8008A2041 /* Commander */,
 				BBA3DAB31D8198D500516E1B /* Main.storyboard */,
 				BBA3DAAA1D8198D500516E1B /* Supporting Files */,
 				A3BD6D291D81A7E1008FFEC6 /* ImageFeedViewController.h */,
@@ -255,7 +255,7 @@
 				TargetAttributes = {
 					BBA3DAA61D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Z2E3HR5V3N;
+						DevelopmentTeam = A8NKHWJDUL;
 					};
 					BBA3DABF1D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
