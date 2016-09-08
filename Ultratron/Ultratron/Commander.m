@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setupURLSession {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.HTTPMaximumConnectionsPerHost = 1;
-    self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[[NSOperationQueue alloc] init]];
+    self.imageFeedSession = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:[[NSOperationQueue alloc] init]];
 }
 
 - (void)subscribeForImageFeed

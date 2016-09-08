@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *left;
 @property (weak, nonatomic) IBOutlet UIButton *zero;
 @property (weak, nonatomic) IBOutlet UIButton *right;
+@property (strong) IBOutlet UIImageView *cameraFeedImage;
 @end
 
 @implementation ViewController
@@ -83,7 +84,7 @@
 
 -(void)imageFeedUpdated:(UIImage *)image
 {
-    NSLog(@"Image");
+    self.cameraFeedImage.image = image;
 }
 
 @end
