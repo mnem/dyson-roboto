@@ -10,6 +10,6 @@
 
 @interface ViewController : UIViewController
 
-
+@property (strong) IBOutlet UIImageView *cameraFeedImage;
 @end
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="NO" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-BN-ahx">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-BN-ahx">
                                 <rect key="frame" x="16" y="319" width="560" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZ2-Na-Ma6">
@@ -45,15 +45,23 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjp-P3-4Mj">
+                                <rect key="frame" x="16" y="11" width="560" height="264"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="WNV-BN-ahx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3C3-P3-3sd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WNV-BN-ahx" secondAttribute="trailing" id="Cfp-xJ-kDG"/>
-                            <constraint firstItem="WNV-BN-ahx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FyZ-gt-Yt3"/>
+                            <constraint firstItem="Tjp-P3-4Mj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="1cq-rk-YKR"/>
+                            <constraint firstItem="WNV-BN-ahx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="3C3-P3-3sd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WNV-BN-ahx" secondAttribute="trailing" constant="4" id="Cfp-xJ-kDG"/>
+                            <constraint firstItem="WNV-BN-ahx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="34" id="FyZ-gt-Yt3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tjp-P3-4Mj" secondAttribute="trailing" constant="4" id="GOD-qi-zgh"/>
+                            <constraint firstItem="hqL-Je-PHT" firstAttribute="top" secondItem="Tjp-P3-4Mj" secondAttribute="bottom" constant="44" id="qyN-AK-xoL"/>
+                            <constraint firstItem="Tjp-P3-4Mj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-9" id="rsr-yB-HRD"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraFeedImage" destination="Tjp-P3-4Mj" id="qdB-bv-HUf"/>
                         <outlet property="left" destination="xZ2-Na-Ma6" id="1Td-4s-7DQ"/>
                         <outlet property="right" destination="8XF-jk-Zok" id="N9w-o2-IW0"/>
                         <outlet property="zero" destination="hqL-Je-PHT" id="drb-Cm-Clg"/>
@@ -61,6 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="304" y="279"/>
         </scene>
     </scenes>
 </document>

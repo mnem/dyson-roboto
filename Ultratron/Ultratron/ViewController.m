@@ -50,7 +50,7 @@
 
 -(void)imageFeedUpdated:(UIImage *)image
 {
-    NSLog(@"Image");
+    self.cameraFeedImage.image = image;
 }
 
 
