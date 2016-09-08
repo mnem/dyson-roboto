@@ -78,18 +78,20 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
     
+    MQTTQosLevel qos = MQTTQosLevelAtMostOnce;
+    
 #if USE_ASYNC_COMMANDS
     [self.session publishData:data
                       onTopic:topic
                        retain:NO
-                          qos:MQTTQosLevelAtLeastOnce
+                          qos:qos
                publishHandler:^(NSError *error) {
                    if (error != nil) {
                        NSLog(@"Commander send command error: %@", error);
                    }
                }];
 #else
-    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelAtLeastOnce];
+    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:qos];
 #endif // USE_ASYNC_COMMANDS
 }
 
