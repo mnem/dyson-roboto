@@ -16,6 +16,7 @@
 		BBA3DAB71D8198D500516E1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBA3DAB61D8198D500516E1B /* Assets.xcassets */; };
 		BBA3DABA1D8198D500516E1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA3DAB81D8198D500516E1B /* LaunchScreen.storyboard */; };
 		BBA3DAC51D8198D500516E1B /* UltratronTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAC41D8198D500516E1B /* UltratronTests.m */; };
+		BBFDF73B1D81B35B004F4A96 /* NSError+Ultratron.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFDF73A1D81B35B004F4A96 /* NSError+Ultratron.m */; };
 		C0C8B7A6F477F0316A7A116F /* libPods-Ultratron.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9839340C263B5BB37AE3E16C /* libPods-Ultratron.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,8 @@
 		BBA3DAC01D8198D500516E1B /* UltratronTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltratronTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA3DAC41D8198D500516E1B /* UltratronTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UltratronTests.m; sourceTree = "<group>"; };
 		BBA3DAC61D8198D500516E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBFDF7391D81B35B004F4A96 /* NSError+Ultratron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Ultratron.h"; sourceTree = "<group>"; };
+		BBFDF73A1D81B35B004F4A96 /* NSError+Ultratron.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Ultratron.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 		BBA3DAA91D8198D500516E1B /* Ultratron */ = {
 			isa = PBXGroup;
 			children = (
+				BBFDF7381D81B33C004F4A96 /* Categories */,
 				BBA3DAAD1D8198D500516E1B /* AppDelegate.h */,
 				BBA3DAAE1D8198D500516E1B /* AppDelegate.m */,
 				BBA3DAB61D8198D500516E1B /* Assets.xcassets */,
@@ -152,6 +156,15 @@
 				BBA3DAC61D8198D500516E1B /* Info.plist */,
 			);
 			path = UltratronTests;
+			sourceTree = "<group>";
+		};
+		BBFDF7381D81B33C004F4A96 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BBFDF7391D81B35B004F4A96 /* NSError+Ultratron.h */,
+				BBFDF73A1D81B35B004F4A96 /* NSError+Ultratron.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +322,7 @@
 				BB747A601D81A8EE008A2041 /* Commander.m in Sources */,
 				BBA3DAB21D8198D500516E1B /* ViewController.m in Sources */,
 				BBA3DAAF1D8198D500516E1B /* AppDelegate.m in Sources */,
+				BBFDF73B1D81B35B004F4A96 /* NSError+Ultratron.m in Sources */,
 				A3BD6D2B1D81A7E1008FFEC6 /* ImageFeedViewController.m in Sources */,
 				BBA3DAAC1D8198D500516E1B /* main.m in Sources */,
 			);
