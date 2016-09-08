@@ -10,19 +10,39 @@
 #import "MQTTClient.h"
 
 @interface ViewController () <MQTTSessionDelegate>
-
+@property (nonatomic) MQTTSession *session;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self setupMQTT];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupMQTT {
+    MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc] init];
+    transport.host = @"192.168.1.113";
+    transport.port = 1883;
+    
+    self.session = [[MQTTSession alloc] init];
+    self.session.transport = transport;
+    
+    self.session.delegate = self;
+    
+    [self.session connectAndWaitTimeout:30];  //this is part of the synchronous API}
+    
+    [self doCommand];
+}
+
+- (void)doCommand {
+    NSDictionary *command = @{@"Left" : @(1000), @"Right" : @(1000)};
+    NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
+    
+    [self.session publishAndWaitData:data
+                             onTopic:@"command/wheel_speed"
+                              retain:NO
+                                 qos:MQTTQosLevelAtLeastOnce];
 }
 
 #pragma mark - MQTTSessionDelegate
