@@ -32,7 +32,7 @@
     self.leftPower = 0;
     self.rightPower = 0;
     
-    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
+    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -72,11 +72,11 @@
 }
 
 - (IBAction)handleLeft:(UIButton *)sender {
-    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
+    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-1000)};
     [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleRight:(UIButton *)sender {
-    NSDictionary *command = @{@"Left" : @(-4000), @"Right" : @(4000)};
+    NSDictionary *command = @{@"Left" : @(-1000), @"Right" : @(4000)};
     [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
 - (IBAction)handleZero:(UIButton *)sender {
@@ -114,7 +114,7 @@
 //    NSString *rightStr = [NSString stringWithFormat:@"%",[@(self.rightPower) integerValue]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"left:%@ right:%@",@(floor(self.leftPower)), @(floor(self.rightPower)));
+//        NSLog(@"left:%@ right:%@",@(floor(self.leftPower)), @(floor(self.rightPower)));
         NSDictionary *command = @{@"Left" : @(floor(self.leftPower)), @"Right" : @(floor(self.rightPower))};
         [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
         
