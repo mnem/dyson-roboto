@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3924264E1D81ACB800FF2A64 /* JCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 392426491D81ACB800FF2A64 /* JCButton.m */; };
+		3924264F1D81ACB800FF2A64 /* JCJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3924264B1D81ACB800FF2A64 /* JCJoystick.m */; };
+		392426501D81ACB800FF2A64 /* JCImageJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3924264D1D81ACB800FF2A64 /* JCImageJoystick.m */; };
+		392426531D81ACC700FF2A64 /* redStick.png in Resources */ = {isa = PBXBuildFile; fileRef = 392426511D81ACC700FF2A64 /* redStick.png */; };
+		392426541D81ACC700FF2A64 /* stickbase.png in Resources */ = {isa = PBXBuildFile; fileRef = 392426521D81ACC700FF2A64 /* stickbase.png */; };
+		392426571D81ACDC00FF2A64 /* JCMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 392426561D81ACDC00FF2A64 /* JCMyScene.m */; };
 		A3BD6D2B1D81A7E1008FFEC6 /* ImageFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BD6D2A1D81A7E1008FFEC6 /* ImageFeedViewController.m */; };
 		BB747A601D81A8EE008A2041 /* Commander.m in Sources */ = {isa = PBXBuildFile; fileRef = BB747A5F1D81A8EE008A2041 /* Commander.m */; };
 		BBA3DAAC1D8198D500516E1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAAB1D8198D500516E1B /* main.m */; };
@@ -31,6 +37,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		392426481D81ACB800FF2A64 /* JCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCButton.h; sourceTree = "<group>"; };
+		392426491D81ACB800FF2A64 /* JCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCButton.m; sourceTree = "<group>"; };
+		3924264A1D81ACB800FF2A64 /* JCJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCJoystick.h; sourceTree = "<group>"; };
+		3924264B1D81ACB800FF2A64 /* JCJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCJoystick.m; sourceTree = "<group>"; };
+		3924264C1D81ACB800FF2A64 /* JCImageJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCImageJoystick.h; sourceTree = "<group>"; };
+		3924264D1D81ACB800FF2A64 /* JCImageJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCImageJoystick.m; sourceTree = "<group>"; };
+		392426511D81ACC700FF2A64 /* redStick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redStick.png; sourceTree = "<group>"; };
+		392426521D81ACC700FF2A64 /* stickbase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickbase.png; sourceTree = "<group>"; };
+		392426551D81ACDC00FF2A64 /* JCMyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMyScene.h; sourceTree = "<group>"; };
+		392426561D81ACDC00FF2A64 /* JCMyScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMyScene.m; sourceTree = "<group>"; };
+		3924265C1D81B3E700FF2A64 /* JoystickDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoystickDelegate.h; sourceTree = "<group>"; };
 		42661DEBB5F05DF2A925DE6E /* Pods-Ultratron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ultratron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron.release.xcconfig"; sourceTree = "<group>"; };
 		4752E534C1E671D5C61E6537 /* Pods-Ultratron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ultratron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ultratron/Pods-Ultratron.debug.xcconfig"; sourceTree = "<group>"; };
 		9839340C263B5BB37AE3E16C /* libPods-Ultratron.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ultratron.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +99,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		392426471D81AC9600FF2A64 /* Joystick */ = {
+			isa = PBXGroup;
+			children = (
+				3924265C1D81B3E700FF2A64 /* JoystickDelegate.h */,
+				392426551D81ACDC00FF2A64 /* JCMyScene.h */,
+				392426561D81ACDC00FF2A64 /* JCMyScene.m */,
+				392426511D81ACC700FF2A64 /* redStick.png */,
+				392426521D81ACC700FF2A64 /* stickbase.png */,
+				392426481D81ACB800FF2A64 /* JCButton.h */,
+				392426491D81ACB800FF2A64 /* JCButton.m */,
+				3924264A1D81ACB800FF2A64 /* JCJoystick.h */,
+				3924264B1D81ACB800FF2A64 /* JCJoystick.m */,
+				3924264C1D81ACB800FF2A64 /* JCImageJoystick.h */,
+				3924264D1D81ACB800FF2A64 /* JCImageJoystick.m */,
+			);
+			name = Joystick;
+			sourceTree = "<group>";
+		};
 		893385F124CACFA30FD7DAA1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +159,7 @@
 		BBA3DAA91D8198D500516E1B /* Ultratron */ = {
 			isa = PBXGroup;
 			children = (
+				392426471D81AC9600FF2A64 /* Joystick */,
 				BBFDF7381D81B33C004F4A96 /* Categories */,
 				BBA3DAAD1D8198D500516E1B /* AppDelegate.h */,
 				BBA3DAAE1D8198D500516E1B /* AppDelegate.m */,
@@ -219,7 +255,7 @@
 				TargetAttributes = {
 					BBA3DAA61D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = A8NKHWJDUL;
+						DevelopmentTeam = Z2E3HR5V3N;
 					};
 					BBA3DABF1D8198D500516E1B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -251,6 +287,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				392426531D81ACC700FF2A64 /* redStick.png in Resources */,
+				392426541D81ACC700FF2A64 /* stickbase.png in Resources */,
 				BBA3DABA1D8198D500516E1B /* LaunchScreen.storyboard in Resources */,
 				BBA3DAB71D8198D500516E1B /* Assets.xcassets in Resources */,
 				BBA3DAB51D8198D500516E1B /* Main.storyboard in Resources */,
@@ -321,10 +359,14 @@
 			files = (
 				BB747A601D81A8EE008A2041 /* Commander.m in Sources */,
 				BBA3DAB21D8198D500516E1B /* ViewController.m in Sources */,
+				3924264F1D81ACB800FF2A64 /* JCJoystick.m in Sources */,
 				BBA3DAAF1D8198D500516E1B /* AppDelegate.m in Sources */,
 				BBFDF73B1D81B35B004F4A96 /* NSError+Ultratron.m in Sources */,
 				A3BD6D2B1D81A7E1008FFEC6 /* ImageFeedViewController.m in Sources */,
 				BBA3DAAC1D8198D500516E1B /* main.m in Sources */,
+				392426501D81ACB800FF2A64 /* JCImageJoystick.m in Sources */,
+				3924264E1D81ACB800FF2A64 /* JCButton.m in Sources */,
+				392426571D81ACDC00FF2A64 /* JCMyScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,12 +497,15 @@
 			baseConfigurationReference = 4752E534C1E671D5C61E6537 /* Pods-Ultratron.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = A8NKHWJDUL;
 				INFOPLIST_FILE = Ultratron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noiseandheat.ios.Ultratron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -469,12 +514,15 @@
 			baseConfigurationReference = 42661DEBB5F05DF2A925DE6E /* Pods-Ultratron.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = A8NKHWJDUL;
 				INFOPLIST_FILE = Ultratron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.noiseandheat.ios.Ultratron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

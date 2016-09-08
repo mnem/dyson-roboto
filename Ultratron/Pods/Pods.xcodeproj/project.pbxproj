@@ -17,6 +17,8 @@
 		1E6A591B3DEE6317BB014BD71A50B689 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 169B6BDE4B78AD229C9BA3FE6EE64301 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2187759985029F40425A60426A66316E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		2D1C114031ADD9C024DC9B6DFC393024 /* MQTTDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6585BB5762AD3778527F537F69B95054 /* MQTTDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		392426591D81AD0800FF2A64 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 392426581D81AD0800FF2A64 /* SpriteKit.framework */; };
+		3924265B1D81AD1D00FF2A64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3924265A1D81AD1D00FF2A64 /* CoreGraphics.framework */; };
 		3DDD0FB94D61AB71C8F5C727EC7A0BD9 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AB61DBA127CF26E330AE04CD491ED3F /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F7B9024F08527D7FD59849F71CD5BAC /* MQTTCFSocketDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 69DB2FC24F9E12E135813E2998AD7900 /* MQTTCFSocketDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41F221F9E8FDE456D3E9EB34B4C5EBF1 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E966F2B32D7B558785109FBAF9A5B3 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -112,6 +114,8 @@
 		2957E74636119000667C87797FBC8D26 /* MQTTCoreDataPersistence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MQTTCoreDataPersistence.h; path = MQTTClient/MQTTClient/MQTTCoreDataPersistence.h; sourceTree = "<group>"; };
 		2ACC1C7EFCBC02BB0AEE4A9415B5C97A /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
 		2D993E437CA98E922225C133FB2381C5 /* libPods-Ultratron.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ultratron.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		392426581D81AD0800FF2A64 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
+		3924265A1D81AD1D00FF2A64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		3AB61DBA127CF26E330AE04CD491ED3F /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		3E1483C539592AA96DDD2505A7EA3542 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
 		3FF04686DC522635226791AC02986820 /* MQTTTransport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MQTTTransport.m; path = MQTTClient/MQTTClient/MQTTTransport.m; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3924265B1D81AD1D00FF2A64 /* CoreGraphics.framework in Frameworks */,
+				392426591D81AD0800FF2A64 /* SpriteKit.framework in Frameworks */,
 				2187759985029F40425A60426A66316E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +399,8 @@
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3924265A1D81AD1D00FF2A64 /* CoreGraphics.framework */,
+				392426581D81AD0800FF2A64 /* SpriteKit.framework */,
 				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
 			);
 			name = Frameworks;
