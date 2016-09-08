@@ -17,14 +17,23 @@
 @property (weak, nonatomic) IBOutlet UIButton *zero;
 @property (weak, nonatomic) IBOutlet UIButton *right;
 @property (strong) IBOutlet UIImageView *cameraFeedImage;
+
+@property (nonatomic,assign) float leftPower;
+@property (nonatomic,assign) float rightPower;
+
+@property (nonatomic,strong) NSTimer *sendCommandTimer;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.spriteKitView.paused = YES;
-
+    
+    self.leftPower = 0;
+    self.rightPower = 0;
+    
+    self.sendCommandTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(trigerSendCommand) userInfo:nil repeats:YES];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.commander = [[Commander alloc] init];
@@ -78,15 +87,41 @@
 #pragma mark - JoystickDelegate
 
 - (void)updateWithLeftJoystick:(float)leftY andRightJoystick:(float)rightY {
-    NSLog(@"Updating joytstick");
-    float leftPower = leftY * 4000;
-    float rightPower = rightY * 4000;
-    NSLog(@"left:%f right:%f",leftPower, rightPower);
+   
     
-    NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
-//    [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+    self.leftPower = leftY * 4000;
+    self.rightPower = rightY * 4000;
+    
+    
+    
+////    if (leftPower > 0 && rightPower > 0) {
+//        NSLog(@"left:%f right:%f",leftPower, rightPower);
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
+//            [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+//        });
+    
+        
+//    }
+    
 
     //    [self doCommand:leftPower and:rightPower];
+}
+
+- (void)trigerSendCommand {
+//    NSString *leftStr = [NSString stringWithFormat:@"%@",[@(self.leftPower) integerValue]];
+//    NSString *rightStr = [NSString stringWithFormat:@"%",[@(self.rightPower) integerValue]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"left:%@ right:%@",@(floor(self.leftPower)), @(floor(self.rightPower)));
+        NSDictionary *command = @{@"Left" : @(floor(self.leftPower)), @"Right" : @(floor(self.rightPower))};
+        [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
+        
+    });
+    
+    
+    
 }
 
 -(void)imageFeedUpdated:(UIImage *)image

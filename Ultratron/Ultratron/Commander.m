@@ -66,18 +66,20 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
     
+    MQTTQosLevel qos = MQTTQosLevelAtMostOnce;
+    
 #if USE_ASYNC_COMMANDS
     [self.session publishData:data
                       onTopic:topic
                        retain:NO
-                          qos:MQTTQosLevelAtLeastOnce
+                          qos:qos
                publishHandler:^(NSError *error) {
                    if (error != nil) {
                        NSLog(@"Commander send command error: %@", error);
                    }
                }];
 #else
-    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:MQTTQosLevelAtLeastOnce];
+    [self.session publishAndWaitData:data onTopic:topic retain:NO qos:qos];
 #endif // USE_ASYNC_COMMANDS
 }
 
@@ -111,13 +113,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)poll
 {
-    NSLog(@"Poll for Image Feed");
+//    NSLog(@"Poll for Image Feed");
     NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
     
     NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         UIImage *image = [UIImage imageWithData:data];
-        NSLog(@"Image Received ");
+//        NSLog(@"Image Received ");
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.delegate)
