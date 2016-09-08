@@ -59,22 +59,13 @@
 
 -(void)update:(CFTimeInterval)currentTime {
 
-    [self.joystickDelegate updateWithLeftJoystick:self.joystickLeft.y andRightJoystick:self.joystickRight.y];
+    if ([self.joystickDelegate respondsToSelector:@selector(updateWithLeftJoystick:andRightJoystick:)]) {
+        [self.joystickDelegate updateWithLeftJoystick:self.joystickLeft.y andRightJoystick:self.joystickRight.y];
+    }
     
     /* Called before each frame is rendered */
 }
 
 
-
-- (void)addSquareIn:(CGPoint)position
-          withColor:(SKColor *)color
-{
-    SKSpriteNode *square = [SKSpriteNode spriteNodeWithColor:color size:CGSizeMake(15,10)];
-    [square setPosition:position];
-    SKAction *move = [SKAction moveTo:CGPointMake(self.size.width+square.size.width/2,position.y) duration:1];
-    SKAction *destroy = [SKAction removeFromParent];
-    [self addChild:square];
-    [square runAction:[SKAction sequence:@[move,destroy]]];
-}
 
 @end
