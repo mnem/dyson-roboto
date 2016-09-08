@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)subscribeForImageFeed
 {
-    _imageFeedPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+    _imageFeedPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.2
                                                               target:self
                                                             selector:@selector(poll)
                                                             userInfo:nil
@@ -113,9 +113,10 @@ NS_ASSUME_NONNULL_BEGIN
         NSLog(@"Image Received ");
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            self.imageFeedView.image = image;
-            
+            if (self.delegate)
+            {
+                [self.delegate imageFeedUpdated:image];
+            }
         });
     }];
     
