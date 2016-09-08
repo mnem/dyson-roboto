@@ -90,6 +90,13 @@
     
     self.leftPower = leftY * 4000;
     self.rightPower = rightY * 4000;
+    
+    if (self.leftPower > 3500) {
+        self.leftPower = 4000;
+    }
+    if (self.rightPower > 3500) {
+        self.rightPower = 4000;
+    }
 
 }
 
