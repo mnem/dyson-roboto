@@ -8,8 +8,10 @@
 
 #import "ViewController.h"
 #import "MQTTClient.h"
+#import "JCMyScene.h"
 
-@interface ViewController () <MQTTSessionDelegate>
+@interface ViewController () <MQTTSessionDelegate, JoystickDelegate>
+@property (weak, nonatomic) IBOutlet SKView *spriteKitView;
 @property (nonatomic) MQTTSession *session;
 @end
 
@@ -18,6 +20,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupMQTT];
+    
+    [self setupJoystickView];
+}
+
+- (void)setupJoystickView {
+    // Configure the view.
+    SKView * skView = self.spriteKitView;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+    skView.multipleTouchEnabled = YES;
+    
+    // Create and configure the scene.
+    JCMyScene * scene = [JCMyScene sceneWithSize:CGSizeMake(skView.bounds.size.height,skView.bounds.size.width)];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.joystickDelegate = self;
+    
+    // Present the scene.
+    [skView presentScene:scene];
 }
 
 - (void)setupMQTT {
@@ -36,8 +56,8 @@
 //    [self doCommand];
 }
 
-- (void)doCommand {
-    NSDictionary *command = @{@"Left" : @(1000), @"Right" : @(1000)};
+- (void)doCommand:(float)leftPower and:(float)rightPower {
+    NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
     NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
     
     [self.session publishAndWaitData:data
@@ -75,5 +95,15 @@
                               retain:NO
                                  qos:MQTTQosLevelAtLeastOnce];
 }
+
+#pragma mark - JoystickDelegate
+
+- (void)updateWithLeftJoystick:(float)leftY andRightJoystick:(float)rightY {
+    float leftPower = leftY * 4000;
+    float rightPower = rightY * 4000;
+    NSLog(@"left:%f right:%f",leftPower, rightPower);
+    [self doCommand:leftPower and:rightPower];
+}
+
 
 @end
