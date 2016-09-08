@@ -107,7 +107,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)poll
 {
     NSLog(@"Poll for Image Feed");
-    NSURLSessionTask *task = [self.session dataTaskWithURL:[NSURL URLWithString:@"http://192.168.1.113:8080/frame.jpg"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
+    
+    NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         UIImage *image = [UIImage imageWithData:data];
         NSLog(@"Image Received ");

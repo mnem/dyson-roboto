@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "Commander.h"
 
-@interface ViewController ()
+@interface ViewController () <CommanderDelegate>
 @property (nonatomic) Commander *commander;
 @property (weak, nonatomic) IBOutlet UIButton *left;
 @property (weak, nonatomic) IBOutlet UIButton *zero;
@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     self.commander = [[Commander alloc] init];
+    self.commander.delegate = self;
     [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError *error) {
         if (error != nil) {
             NSLog(@"Could not connect: %@", error);
@@ -46,5 +47,11 @@
     NSDictionary *command = @{@"Left" : @(0), @"Right" : @(0)};
     [self.commander sendCommandDictionary:command forTopic:@"command/wheel_speed"];
 }
+
+-(void)imageFeedUpdated:(UIImage *)image
+{
+    NSLog(@"Image");
+}
+
 
 @end
