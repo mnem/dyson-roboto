@@ -7,15 +7,12 @@
 //
 
 #import "ViewController.h"
-//#import "MQTTClient.h"
 #import "JCMyScene.h"
 #import "Commander.h"
 
-@interface ViewController () <JoystickDelegate>
-@property (weak, nonatomic) IBOutlet SKView *spriteKitView;
-//@property (nonatomic) MQTTSession *session;
-
+@interface ViewController () <JoystickDelegate, CommanderDelegate>
 @property (nonatomic) Commander *commander;
+@property (weak, nonatomic) IBOutlet SKView *spriteKitView;
 @property (weak, nonatomic) IBOutlet UIButton *left;
 @property (weak, nonatomic) IBOutlet UIButton *zero;
 @property (weak, nonatomic) IBOutlet UIButton *right;
@@ -28,7 +25,8 @@
     self.spriteKitView.paused = YES;
     
     self.commander = [[Commander alloc] init];
-    [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError * _Nullable error) {
+    self.commander.delegate = self;
+    [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError *error) {
         if (error != nil) {
             NSLog(@"Error connecting: %@", error);
             return;
@@ -38,10 +36,6 @@
         self.spriteKitView.paused = NO;
         [self setupJoystickView];
     }];
-    
-//    [self setupMQTT];
-    
-//    [self setupJoystickView];
 }
 
 - (void)setupJoystickView {
@@ -59,39 +53,6 @@
     // Present the scene.
     [skView presentScene:scene];
 }
-
-//- (void)setupMQTT {
-//    MQTTCFSocketTransport *transport = [[MQTTCFSocketTransport alloc] init];
-//    transport.host = @"192.168.1.113";
-//    transport.port = 1883;
-//    
-//    self.session = [[MQTTSession alloc] init];
-//    self.session.transport = transport;
-//    self.session.protocolLevel = MQTTProtocolVersion31;
-//    
-//    self.session.delegate = self;
-//    
-//    [self.session connectAndWaitTimeout:30];  //this is part of the synchronous API}
-//    
-////    [self doCommand];
-//}
-
-//- (void)doCommand:(float)leftPower and:(float)rightPower {
-//    NSDictionary *command = @{@"Left" : @(leftPower), @"Right" : @(rightPower)};
-//    NSData* data = [NSJSONSerialization dataWithJSONObject:command options:kNilOptions error:nil];
-//    
-//    self.commander = [[Commander alloc] init];
-//    [self.commander connectToIPAddress:@"192.168.1.113" handler:^(NSError *error) {
-//        if (error != nil) {
-//            NSLog(@"Could not connect: %@", error);
-//            return;
-//        }
-//        
-//        self.left.enabled = YES;
-//        self.zero.enabled = YES;
-//        self.right.enabled = YES;
-//    }];
-//}
 
 - (IBAction)handleLeft:(UIButton *)sender {
 //    NSDictionary *command = @{@"Left" : @(4000), @"Right" : @(-4000)};
@@ -120,5 +81,9 @@
     //    [self doCommand:leftPower and:rightPower];
 }
 
+-(void)imageFeedUpdated:(UIImage *)image
+{
+    NSLog(@"Image");
+}
 
 @end

@@ -7,12 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@protocol CommanderDelegate <NSObject>
+@required
+-(void)imageFeedUpdated:(UIImage *)image;
+
+@end
 
 typedef void (^ConnectionHandler)(NSError * _Nullable);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Commander : NSObject
+
+@property (weak) id<CommanderDelegate> delegate;
 
 /**
  Attempts to connect to the specified IP address on the standard port, using
