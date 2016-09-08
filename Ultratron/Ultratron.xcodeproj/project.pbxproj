@@ -14,7 +14,7 @@
 		392426541D81ACC700FF2A64 /* stickbase.png in Resources */ = {isa = PBXBuildFile; fileRef = 392426521D81ACC700FF2A64 /* stickbase.png */; };
 		392426571D81ACDC00FF2A64 /* JCMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 392426561D81ACDC00FF2A64 /* JCMyScene.m */; };
 		A3BD6D2B1D81A7E1008FFEC6 /* ImageFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BD6D2A1D81A7E1008FFEC6 /* ImageFeedViewController.m */; };
-		BB747A601D81A8EE008A2041 /* Commander.m in Sources */ = {isa = PBXBuildFile; fileRef = BB747A5F1D81A8EE008A2041 /* Commander.m */; };
+		BB747A601D81A8EE008A2041 /* Commander.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB747A5F1D81A8EE008A2041 /* Commander.mm */; };
 		BBA3DAAC1D8198D500516E1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAAB1D8198D500516E1B /* main.m */; };
 		BBA3DAAF1D8198D500516E1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAAE1D8198D500516E1B /* AppDelegate.m */; };
 		BBA3DAB21D8198D500516E1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAB11D8198D500516E1B /* ViewController.m */; };
@@ -54,7 +54,7 @@
 		A3BD6D291D81A7E1008FFEC6 /* ImageFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFeedViewController.h; sourceTree = "<group>"; };
 		A3BD6D2A1D81A7E1008FFEC6 /* ImageFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFeedViewController.m; sourceTree = "<group>"; };
 		BB747A5E1D81A8EE008A2041 /* Commander.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Commander.h; path = Ultratron/Commander.h; sourceTree = "<group>"; };
-		BB747A5F1D81A8EE008A2041 /* Commander.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Commander.m; path = Ultratron/Commander.m; sourceTree = "<group>"; };
+		BB747A5F1D81A8EE008A2041 /* Commander.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Commander.mm; path = Ultratron/Commander.mm; sourceTree = "<group>"; };
 		BBA3DAA71D8198D500516E1B /* Ultratron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ultratron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA3DAAB1D8198D500516E1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BBA3DAAD1D8198D500516E1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				BB747A5E1D81A8EE008A2041 /* Commander.h */,
-				BB747A5F1D81A8EE008A2041 /* Commander.m */,
+				BB747A5F1D81A8EE008A2041 /* Commander.mm */,
 			);
 			name = Communication;
 			path = ..;
@@ -357,7 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB747A601D81A8EE008A2041 /* Commander.m in Sources */,
+				BB747A601D81A8EE008A2041 /* Commander.mm in Sources */,
 				BBA3DAB21D8198D500516E1B /* ViewController.m in Sources */,
 				3924264F1D81ACB800FF2A64 /* JCJoystick.m in Sources */,
 				BBA3DAAF1D8198D500516E1B /* AppDelegate.m in Sources */,
