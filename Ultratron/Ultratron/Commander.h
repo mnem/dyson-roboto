@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^TypeName)(parameterTypes);
+//typedef void (^ConnectionHandler)(NSError __nullable *  *);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  C
  */
-//- connectToIPAddress:(NSString *)ipAddress successHandler:(dispatch_block_;
+//- connectToIPAddress:(NSString *)ipAddress handler:(ConnectionHandler)handler;
 
 @end
 
