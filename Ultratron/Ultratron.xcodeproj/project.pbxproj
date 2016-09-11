@@ -13,8 +13,6 @@
 		392426531D81ACC700FF2A64 /* redStick.png in Resources */ = {isa = PBXBuildFile; fileRef = 392426511D81ACC700FF2A64 /* redStick.png */; };
 		392426541D81ACC700FF2A64 /* stickbase.png in Resources */ = {isa = PBXBuildFile; fileRef = 392426521D81ACC700FF2A64 /* stickbase.png */; };
 		392426571D81ACDC00FF2A64 /* JCMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 392426561D81ACDC00FF2A64 /* JCMyScene.m */; };
-		BB747A601D81A8EE008A2041 /* Commander.m in Sources */ = {isa = PBXBuildFile; fileRef = BB747A5F1D81A8EE008A2041 /* Commander.m */; };
-		A3BD6D2B1D81A7E1008FFEC6 /* ImageFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BD6D2A1D81A7E1008FFEC6 /* ImageFeedViewController.m */; };
 		BB747A601D81A8EE008A2041 /* Commander.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB747A5F1D81A8EE008A2041 /* Commander.mm */; };
 		BBA3DAAC1D8198D500516E1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAAB1D8198D500516E1B /* main.m */; };
 		BBA3DAAF1D8198D500516E1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA3DAAE1D8198D500516E1B /* AppDelegate.m */; };

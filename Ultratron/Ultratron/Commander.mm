@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
         
         self.session.delegate = self;
         
-        const BOOL connected = [self.session connectAndWaitTimeout:30];  //this is part of the synchronous API
+        const BOOL connected = [self.session connectAndWaitTimeout:0.1];  //this is part of the synchronous API
         
         NSError *error = nil;
         if (!connected) {
@@ -182,39 +182,59 @@ NS_ASSUME_NONNULL_BEGIN
 #if USE_OPEN_CV
 - (void)poll
 {
-    NSLog(@"Poll for Image Feed");
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
+    UIImage *image = [UIImage imageNamed:@"placeholderView" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
+
+    cv::Mat unwrapped = [self cvMatFromUIImage:image];
+
+    static cv::Mat map_x;
+    static cv::Mat map_y;
+    static dispatch_once_t onceToken2;
+    dispatch_once(&onceToken2, ^{
+        build_map(unwrapped.cols, unwrapped.rows, map_x, map_y);
+    });
+
+    cv::Mat remapped;
+    cv::remap(unwrapped, remapped, map_x, map_y, CV_INTER_LINEAR);
+
+    image = [self UIImageFromCVMat:remapped];
     
-    NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        UIImage *image = [UIImage imageWithData:data];
-        NSLog(@"Image Received ");
-        
-        cv::Mat unwrapped = [self cvMatFromUIImage:image];
-        
-        static cv::Mat map_x;
-        static cv::Mat map_y;
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            build_map(unwrapped.cols, unwrapped.rows, map_x, map_y);
-        });
-        
-        
-        
-        cv::Mat remapped;
-        cv::remap(unwrapped, remapped, map_x, map_y, CV_INTER_LINEAR);
-        
-        image = [self UIImageFromCVMat:remapped];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.delegate)
-            {
-                [self.delegate imageFeedUpdated:image];
-            }
-        });
-    }];
+    if ([self.delegate respondsToSelector:@selector(imageFeedUpdated:)]) {
+        [self.delegate imageFeedUpdated:image];
+    }
     
-    [task resume];
+//    NSLog(@"Poll for Image Feed");
+//    NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
+//    
+//    NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        
+//        UIImage *image = [UIImage imageWithData:data];
+//        NSLog(@"Image Received ");
+//        
+//        cv::Mat unwrapped = [self cvMatFromUIImage:image];
+//        
+//        static cv::Mat map_x;
+//        static cv::Mat map_y;
+//        static dispatch_once_t onceToken;
+//        dispatch_once(&onceToken, ^{
+//            build_map(unwrapped.cols, unwrapped.rows, map_x, map_y);
+//        });
+//        
+//        
+//        
+//        cv::Mat remapped;
+//        cv::remap(unwrapped, remapped, map_x, map_y, CV_INTER_LINEAR);
+//        
+//        image = [self UIImageFromCVMat:remapped];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (self.delegate)
+//            {
+//                [self.delegate imageFeedUpdated:image];
+//            }
+//        });
+//    }];
+//    
+//    [task resume];
 }
 #else
 - (void)poll
@@ -273,7 +293,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                     rows,                       // Height of bitmap
                                                     8,                          // Bits per component
                                                     cvMat.step[0],              // Bytes per row
-                                                    colorSpace,                 // Colorspace
+//                                                    colorSpace,                 // Colorspace
+                                                    CGColorSpaceCreateDeviceRGB(),                 // Colorspace
                                                     kCGImageAlphaNoneSkipLast |
                                                     kCGBitmapByteOrderDefault); // Bitmap info flags
     
