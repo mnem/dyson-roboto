@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
         
         self.session.delegate = self;
         
-        const BOOL connected = [self.session connectAndWaitTimeout:30];  //this is part of the synchronous API
+        const BOOL connected = [self.session connectAndWaitTimeout:0.1];  //this is part of the synchronous API
         
         NSError *error = nil;
         if (!connected) {
@@ -142,7 +142,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)poll
 {
-//    NSLog(@"Poll for Image Feed");
+    static UIImage *image;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        image = [UIImage imageNamed:@"placeholderView" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
+    });
+    
+    if ([self.delegate respondsToSelector:@selector(imageFeedUpdated:)]) {
+        [self.delegate imageFeedUpdated:image];
+    }
+    
+/*
+    //    NSLog(@"Poll for Image Feed");
     NSString *urlString = [NSString stringWithFormat:@"http://%@:8080/frame.jpg",self.ipAddress];
     
     NSURLSessionTask *task = [self.imageFeedSession dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -159,6 +170,7 @@ NS_ASSUME_NONNULL_BEGIN
     }];
     
     [task resume];
+ */
 }
 
 - (void)subscribeToTopic:(NSString *)topic withHandler:(SubscriptionHandler)handler {

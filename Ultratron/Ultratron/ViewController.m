@@ -58,7 +58,6 @@ NSString * const kTopicStatusOdemetry = @"status/odemetry";
         
     });
     
-    
     [self setupJoystickView];
 }
 
